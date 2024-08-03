@@ -27,14 +27,15 @@ for IP in $(cat ip_OK.txt); do
 echo ""$passwd"" | sudo -S rm -rf /opt/pdv_e1update ; \
 echo ""$passwd"" | sudo -S mkdir -p /opt/pdv_e1update ; \
 echo ""$passwd"" | sudo -S chmod 777 /opt/pdv_e1update ; \
-ls -ld /opt/pdv_e1update ; \
+# ls -ld /opt/pdv_e1update ; \
 echo ""$passwd"" | sudo -S git clone https://github.com/elppans/pdv_elgini9x64.git /opt/pdv_e1update ; \
 cd /opt/pdv_e1update ; \
-pwd ; \
-echo "Configuracao atual..." ; \
-cat /Zanthus/Zeus/pdvJava/ECFRECEB.CFG /Zanthus/Zeus/pdvJava/EMUL.INI ; \
+# pwd ; \
+# echo "Configuracao atual..." ; \
+# cat /Zanthus/Zeus/pdvJava/ECFRECEB.CFG /Zanthus/Zeus/pdvJava/EMUL.INI ; \
 echo ""$passwd"" | sudo -S ./set_elgini9x64.sh ; \
-echo "Configuracao apos executar script..." ; \
+echo "Pos Configuracao..." ; \
+sleep 2 ; \
 cat /Zanthus/Zeus/pdvJava/ECFRECEB.CFG /Zanthus/Zeus/pdvJava/EMUL.INI ; \
 ls -l /Zanthus/Zeus/lib_u64/libE1_Impressora* ; \
 echo ""$passwd"" | date | sudo -S tee /Zanthus/Zeus/update.txt 
