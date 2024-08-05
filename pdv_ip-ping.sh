@@ -10,6 +10,6 @@ for IP in $(cat ip.txt); do
         echo "$IP" >>ip_OK.txt
     else
         echo "$IP OFF"
-        echo "$IP OFF" >>ip_OFF.txt
+        echo "$IP" >>ip_OFF.txt
     fi
 done
