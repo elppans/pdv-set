@@ -23,6 +23,8 @@ for IP in $(cat ip_OK.txt); do
     echo "$IP" &&
         sshpass -p "$passwd" ssh -o StrictHostKeyChecking=no "$user"@"$IP" "
         "grep VERSION_ID /etc/os-release" && \
-        cat /Zanthus/Zeus/pdvJava/ECFRECEB.CFG /Zanthus/Zeus/pdvJava/EMUL.INI
+        grep biblioteca /Zanthus/Zeus/pdvJava/ECFRECEB.CFG && \
+	    cat /Zanthus/Zeus/pdvJava/EMUL.INI
+	    echo ""
         "
 done
