@@ -25,12 +25,8 @@ for IP in $(cat ip_OK.txt); do
         sshpass -p "$passwd" ssh -o StrictHostKeyChecking=no "$user"@"$IP" \
         "
 echo ""$passwd"" | sudo -S rm -rf /opt/pdv_e1update
-echo ""$passwd"" | sudo -S mkdir -p /opt/pdv_e1update
-echo ""$passwd"" | sudo -S chmod 777 /opt/pdv_e1update
-# ls -ld /opt/pdv_e1update ; \
 echo ""$passwd"" | sudo -S git clone https://github.com/elppans/pdv_elgini9x64.git /opt/pdv_e1update
 cd /opt/pdv_e1update
-# pwd ; \
 echo ""$passwd"" | sudo -S ./set_elgini9x64.sh
 grep VERSION_ID /etc/os-release
 grep biblioteca /Zanthus/Zeus/pdvJava/ECFRECEB.CFG
