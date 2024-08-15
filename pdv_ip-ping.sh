@@ -1,5 +1,18 @@
 #!/bin/bash
 
+IP_FILE="ip.txt"
+
+# Função para verificar se o arquivo ip.txt existe
+check_ip_file_exists() {
+    if [ ! -f "$IP_FILE" ]; then
+        echo "Erro: O arquivo $IP_FILE não existe."
+        exit 1
+    fi
+}
+
+# Executa função de verificação do arquivo ip.txt
+check_ip_file_exists
+
 rm -rf ip_OK.txt >> /dev/null
 rm -rf ip_OFF.txt >> /dev/null
 
