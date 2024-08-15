@@ -1,3 +1,9 @@
+# Ignorar tudo
 *
-!/*.sh
-
+# Não ignorar arquivos específicos
+!/pdv_ip-access.sh
+!/pdv_ip-ping.sh
+!/pdv_ip-setE1.sh
+!/pdv_ip-version.sh
+!/README.md
+!/ssh-keyscan.sh
