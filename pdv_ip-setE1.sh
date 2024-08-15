@@ -23,7 +23,7 @@ for IP in $(cat ip_OK.txt); do
 
     echo "$IP" &&
         sshpass -p "$passwd" ssh -o StrictHostKeyChecking=no "$user"@"$IP" \
-        "
+            "
 source /etc/environment
 echo ""$passwd"" | sudo -S $Z_MOUNT 2>/dev/null
 mount | grep path

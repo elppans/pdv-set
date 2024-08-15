@@ -20,13 +20,13 @@ export passwd
 # Executar comandos via SSH, usando IP atribuido ao arquivo ip_OK.txt
 # shellcheck disable=SC2013
 for IP in $(cat ip_OK.txt); do
-        ./ssh-keyscan.sh
-        echo "$IP" &&
+        ./ssh-keyscan.sh "$IP"
+        # echo "$IP" &&
         sshpass -p "$passwd" ssh -o StrictHostKeyChecking=no "$user"@"$IP" "
         grep VERSION_ID /etc/os-release
         cat /etc/canoalinux-release
         grep biblioteca /Zanthus/Zeus/pdvJava/ECFRECEB.CFG
-	    cat /Zanthus/Zeus/pdvJava/EMUL.INI
-	    echo ""
+	cat /Zanthus/Zeus/pdvJava/EMUL.INI
+	echo ""
         "
 done

@@ -1,4 +1,14 @@
 #!/bin/bash
+# adicionar um host ao arquivo known_hosts sem precisar acessar o servidor.
+# Comando para escanear a chave pública do host e adicioná-la ao arquivo known_hosts
+
+#ssh-keyscan -H 10.100.135.83 >> ~/.ssh/known_hosts
+
+# Verifica se o primeiro parâmetro foi fornecido
+if [ -z "$1" ]; then
+    echo "Você não forneceu nenhum valor."
+    exit 1
+fi
 
 IP="$1"
 KNOWN_HOSTS_FILE="$HOME/.ssh/known_hosts"
