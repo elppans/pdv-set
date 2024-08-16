@@ -27,6 +27,6 @@ for IP in $(cat ip_OK.txt); do
         cat /etc/canoalinux-release
         grep biblioteca /Zanthus/Zeus/pdvJava/ECFRECEB.CFG
 	cat /Zanthus/Zeus/pdvJava/EMUL.INI
-	echo ""
+	echo " "
         "
 done
