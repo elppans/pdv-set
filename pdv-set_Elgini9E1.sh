@@ -37,9 +37,9 @@ echo ""$passwd"" | sudo -S find /Zanthus -name ECFRECEB.CFG
 # Procurar e remover também, ECFRECEB.CFG.OLD
 echo ""$passwd"" | sudo -S find /Zanthus -path /Zanthus/Zeus/pdvJava -prune -o \( -name "ECFRECEB.CFG" -o -name "ECFRECEB.CFG.OLD" \) -exec rm {} \; 2>/dev/null
 echo ""$passwd"" | sudo -S rm -rf /opt/pdv_e1update 2> /dev/null
-echo ""$passwd"" | sudo -S git clone https://github.com/elppans/pdv_elgini9x64.git /opt/pdv_e1update
+echo ""$passwd"" | sudo -S git clone https://github.com/elppans/pdv-Elgini9E1x64.git /opt/pdv_e1update
 cd /opt/pdv_e1update
-echo ""$passwd"" | sudo -S ./set_elgini9x64.sh
+echo ""$passwd"" | sudo -S ./set_Elgini9E1x64.sh
 grep VERSION_ID /etc/os-release
 grep biblioteca /Zanthus/Zeus/pdvJava/ECFRECEB.CFG
 cat /Zanthus/Zeus/pdvJava/EMUL.INI
