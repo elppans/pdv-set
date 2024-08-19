@@ -1,4 +1,5 @@
 #!/bin/bash
+# Script para verificar versão do PDV
 
 # Verifica se o primeiro parâmetro foi fornecido
 if [ -z "$1" ]; then
