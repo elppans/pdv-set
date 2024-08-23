@@ -12,10 +12,15 @@ if [ -z "$2" ]; then
     exit 1
 fi
 
+if [ -z "$3" ]; then
+    echo "Você não forneceu nenhum valor. Por favor, insira um valor para o arquivo."
+    exit 1
+fi
+
 # Se o parâmetro foi fornecido, atribui-o à variável 'user'
 user="$1"
 passwd="$2"
-file="$3"
+file="cat $3"
 export user
 export passwd
 export file
@@ -26,6 +31,6 @@ for IP in $(cat ip_OK.txt); do
     echo "$IP"
     sshpass -p "$passwd" ssh -o StrictHostKeyChecking=no "$user"@"$IP" \
         "
-
+    ""${file}""
 "
 done
