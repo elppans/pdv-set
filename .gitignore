@@ -1,12 +1,13 @@
 # Ignorar tudo
 *
 # Não ignorar arquivos específicos
-!/pdv_ip-access.sh
-!/pdv_ip-ping.sh
-!/pdv_ip-setE1.sh
-!/pdv_ip-version.sh
-!/README.md
-!/ssh-keyscan.sh
-!/sh
-!/sh/fw_flags-modelo.sh
-!/pdv-set_flagsmod.sh
+!/*.sh
+# !/pdv_ip-access.sh
+# !/pdv_ip-ping.sh
+# !/pdv_ip-setE1.sh
+# !/pdv_ip-version.sh
+# !/README.md
+# !/ssh-keyscan.sh
+# !/sh
+# !/sh/fw_flags-modelo.sh
+# !/pdv-set_flagsmod.sh
