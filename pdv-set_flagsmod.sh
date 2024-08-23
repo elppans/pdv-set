@@ -1,5 +1,6 @@
 #!/bin/bash
 # shellcheck disable=SC1078,SC1079,SC2013,SC2140
+# shellcheck source=/dev/null
 
 # Verifica se o primeiro parâmetro foi fornecido
 if [ -z "$1" ]; then
