@@ -26,14 +26,16 @@ for IP in $(cat ip_OK.txt); do
     sshpass -p "$passwd" ssh -o StrictHostKeyChecking=no "$user"@"$IP" \
         "
         # cmd
-        # source /Zanthus/Zeus/pdvJava/EMUL.INI  &>>/dev/null
-        # echo ""$passwd"" | sudo -S sed -i "s/FW_FLAGS="${FW_FLAGS}"/FW_FLAGS=2/" /Zanthus/Zeus/pdvJava/EMUL.INI
-        # echo ""$passwd"" | sudo -S sed -i "s/FW_MODELO_IMPRESSORA="${FW_MODELO_IMPRESSORA}"/FW_MODELO_IMPRESSORA=0/" /Zanthus/Zeus/pdvJava/EMUL.INI
+if [ -d /opt/pdv_e1update ]; then
         echo ""$passwd"" | sudo -S rm -rf /opt/pdv_e1update &>>/dev/null
-        echo ""
-        # cat /Zanthus/Zeus/pdvJava/ECFRECEB.CFG
-        # cat /Zanthus/Zeus/pdvJava/EMUL.INI
         echo "..."
+        sleep 2
+        if [ -d /opt/pdv_e1update ]; then
+        echo "..?"
+        fi
+else
+        echo "..!"
+fi
         # cmd
         "
 done
