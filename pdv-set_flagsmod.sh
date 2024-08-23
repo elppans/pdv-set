@@ -12,18 +12,11 @@ if [ -z "$2" ]; then
     exit 1
 fi
 
-if [ -z "$3" ]; then
-    echo "Você não forneceu nenhum valor. Por favor, insira um valor para o arquivo."
-    exit 1
-fi
-
 # Se o parâmetro foi fornecido, atribui-o à variável 'user'
 user="$1"
 passwd="$2"
-file="cat $3"
 export user
 export passwd
-export file
 
 # Executar comandos via SSH, usando IP atribuido ao arquivo ip_OK.txt
 for IP in $(cat ip_OK.txt); do
@@ -31,6 +24,15 @@ for IP in $(cat ip_OK.txt); do
     echo "$IP"
     sshpass -p "$passwd" ssh -o StrictHostKeyChecking=no "$user"@"$IP" \
         "
-    ""${file}""
-"
+        # cmd
+        source /Zanthus/Zeus/pdvJava/EMUL.INI  &>>/dev/null
+        echo ""$passwd"" | sudo -S sed -i "s/FW_FLAGS="${FW_FLAGS}"/FW_FLAGS=2/" /Zanthus/Zeus/pdvJava/EMUL.INI
+        echo ""$passwd"" | sudo -S sed -i "s/FW_MODELO_IMPRESSORA="${FW_MODELO_IMPRESSORA}"/FW_MODELO_IMPRESSORA=0/" /Zanthus/Zeus/pdvJava/EMUL.INI
+        echo ""$passwd"" | sudo -S rm -rf /opt/pdv_e1update &>>/dev/null
+        echo ""
+        cat /Zanthus/Zeus/pdvJava/ECFRECEB.CFG
+        cat /Zanthus/Zeus/pdvJava/EMUL.INI
+        echo "..."
+        # cmd
+        "
 done

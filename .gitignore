@@ -7,5 +7,6 @@
 !/pdv_ip-version.sh
 !/README.md
 !/ssh-keyscan.sh
-!/fw_flags-modelo.sh
-!/pdv-set_CMD.sh
+!/sh
+!/sh/fw_flags-modelo.sh
+!/pdv-set_flagsmod.sh
