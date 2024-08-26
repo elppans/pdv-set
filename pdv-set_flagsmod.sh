@@ -33,75 +33,24 @@ for IP in $(cat "$IP_OK_FILE"); do
     sshpass -p "$passwd" ssh -o StrictHostKeyChecking=no "$user"@"$IP" \
         "
         # Shell/CMD
-# Variáveis para o ambiente de PDV
-ecfreceb="/Zanthus/Zeus/pdvJava/ECFRECEB.CFG"
-emul="/Zanthus/Zeus/pdvJava/EMUL.INI"
-lib_u64="/Zanthus/Zeus/lib_u64"
-busdev="$(lsusb | grep '20d1:7008' | awk '{print $6}')"
-
-# Exportar variáveis para o ambiente
-export ecfreceb
-export emul
-export lib_u64
-export busdev
-
 # Exportar environments
-source "$ecfreceb" &>>/dev/null
-source "$emul" &>>/dev/null
+source /Zanthus/Zeus/pdvJava/ECFRECEB.CFG &>>/dev/null
 
 # Verifica se IRQ = i9
-if [ "$busdev" == "20d1:7008" ]; then
+if lsusb -d "20d1:7008" > /dev/null; then
 # Se IRQ for igual de Elgin i9, faz as configurações necessárias.
     echo "Elgin i9"
-    # Verifica se IZ != R82 e configura
-    if [ ! "$ecfreceb" == "izrcb_R82" ]; then
-    # Se IZ != R82 faz a conversão.
-        # echo "Configurando IZ para R82..."
-        # echo -e 'biblioteca=izrcb_R82\n' >"$ecfreceb"
-        # echo "Configurando EMUL.INI..."
-        # # Verifica se o parâmetro FW_INVERTE_GAVETA já existe e não está comentado
-        # if grep -q "^[^#]*FW_INVERTE_GAVETA" "$emul"; then
-        #     # Adiciona as configurações necessárias com o parâmetro FW_INVERTE_GAVETA
-        #     {
-        #         echo -e 'FW_FLAGS=1'
-        #         echo -e 'FW_MODELO_IMPRESSORA=0'
-        #         echo -e 'FW_PORTA_USB'
-        #         echo -e 'FW_INVERTE_GAVETA'
-        #     } >"$emul"
-        # else
-        #     # Adiciona as configurações necessárias
-        #     {
-        #         echo -e 'FW_FLAGS=2'
-        #         echo -e 'FW_MODELO_IMPRESSORA=0'
-        #         echo -e 'FW_PORTA_USB'
-        #     } >"$emul"
-        # fi
-        :
-    else
-    # Se IZ = R82 faz alumas correções, se necessário
-        if grep -q "^[^#]*FW_INVERTE_GAVETA" "$emul"; then
-            # Adiciona as configurações necessárias com o parâmetro FW_INVERTE_GAVETA
-			# cmd
-            # echo ""$passwd"" | sudo -S sed -i "s/FW_FLAGS="${FW_FLAGS}"/FW_FLAGS=1/" "$emul"
-            echo ""$passwd"" | sudo -S sed -i "s/FW_MODELO_IMPRESSORA="${FW_MODELO_IMPRESSORA}"/FW_MODELO_IMPRESSORA=0/" "$emul"
-            echo " "
-            grep 'FW_FLAGS' "$emul"
-            grep 'FW_MODELO_IMPRESSORA' "$emul"
-			# cmd
-        else
-            # Adiciona as configurações necessárias quando SEM o parâmetro FW_INVERTE_GAVETA
-            # cmd
-            # echo ""$passwd"" | sudo -S sed -i "s/FW_FLAGS="${FW_FLAGS}"/FW_FLAGS=2/" "$emul"
-            echo ""$passwd"" | sudo -S sed -i "s/FW_MODELO_IMPRESSORA="${FW_MODELO_IMPRESSORA}"/FW_MODELO_IMPRESSORA=0/" "$emul"
-            echo " "
-            grep 'FW_FLAGS' "$emul"
-            grep 'FW_MODELO_IMPRESSORA' "$emul"
-			# cmd
-        fi
-    fi
+    # cmd
+    # echo ""$passwd"" | sudo -S sed -i '/FW_FLAGS/s/[0-9]\+/2/' /Zanthus/Zeus/pdvJava/EMUL.INI
+    echo ""$passwd"" | sudo -S sed -i '/FW_MODELO_IMPRESSORA/d' /Zanthus/Zeus/pdvJava/EMUL.INI
+    echo ""$passwd"" | echo 'FW_MODELO_IMPRESSORA=0' | sudo -S tee -a /Zanthus/Zeus/pdvJava/EMUL.INI >>/dev/null
+    echo " "
+    grep 'FW_FLAGS' /Zanthus/Zeus/pdvJava/EMUL.INI
+    grep 'FW_MODELO_IMPRESSORA' /Zanthus/Zeus/pdvJava/EMUL.INI
+	# cmd
 else
 # Se IRQ for diferente de Elgin i9, NÃO faz nada!
-    :
+    echo " "
 fi
         # Shell/CMD
         "
