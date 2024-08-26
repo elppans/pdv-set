@@ -48,9 +48,9 @@ if lsusb -d "20d1:7008" > /dev/null; then
     grep 'FW_FLAGS' /Zanthus/Zeus/pdvJava/EMUL.INI
     grep 'FW_MODELO_IMPRESSORA' /Zanthus/Zeus/pdvJava/EMUL.INI
 	# cmd
-else
+# else
 # Se IRQ for diferente de Elgin i9, NÃO faz nada!
-    echo " "
+    # echo " "
 fi
         # Shell/CMD
         "
