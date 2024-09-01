@@ -18,6 +18,11 @@ IP_FILE="$IP_DIR/ip.txt"
 IP_OK_FILE="$IP_DIR/ip_ok.txt"
 IP_OFF_FILE="$IP_DIR/ip_off.txt"
 
+export IP_DIR
+export IP_FILE
+export IP_OK_FILE
+export IP_OFF_FILE
+
 mkdir -p "$IP_DIR"
 
 # Se o parâmetro foi fornecido, atribui-o à variável 'user'
