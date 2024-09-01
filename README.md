@@ -10,6 +10,8 @@ ___
 - Dependência
 
 ```ini
+iputils
+openssh
 sshpass
 ```
 
