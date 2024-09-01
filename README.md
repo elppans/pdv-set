@@ -7,7 +7,7 @@ Este pacote é utilizado exclusivamente à configuração padrão à distância,
 Qualquer aspecto FORA da documentação NÃO será implementada.  
 ___
 
-- Dependência
+- Dependências
 
 ```ini
 iputils
