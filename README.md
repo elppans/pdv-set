@@ -3,8 +3,8 @@ ___
 ## Observação:
 
 Código retirado e simplificado de `pdv-ssync`, porém, não é e nem fará parte do mesmo.  
-Este pacote é utilizado exclusivamente à configuração padrão à distância, de acordo com a documentação.  
-Qualquer aspecto FORA da documentação NÃO será implementada.  
+Este pacote é utilizado exclusivamente à configuração padrão à distância, **de acordo com a documentação**.  
+Qualquer aspecto **FORA** da documentação **NÃO** será implementada.  
 ___
 
 - Dependências
