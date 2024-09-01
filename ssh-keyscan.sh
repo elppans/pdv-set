@@ -13,8 +13,13 @@ if [ -z "$1" ]; then
     exit 1
 fi
 
+# Variáveis para o ambiente
 IP="$1"
 KNOWN_HOSTS_FILE="$HOME/.ssh/known_hosts"
+
+# Exportar variáveis do ambiente
+export IP
+export KNOWN_HOSTS_FILE
 
 # Função para verificar se o IP está no arquivo known_hosts
 check_ip_in_known_hosts() {
