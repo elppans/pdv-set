@@ -5,6 +5,7 @@ ___
 Código retirado e simplificado de `pdv-ssync`, porém, não é e nem fará parte do mesmo.  
 Este pacote é utilizado exclusivamente à configuração padrão à distância, **de acordo com a documentação**.  
 Qualquer aspecto **FORA** da documentação **NÃO** será implementada.  
+Os scripts deste repositório **NÃO** configura de fato o sistema com o IP fornecido, apenas executa um outro Script de **OUTRO repositório pré definido**.  
 ___
 
 - Dependências
