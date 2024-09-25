@@ -3,15 +3,15 @@
 # shellcheck source=/dev/null
 
 # Verifica se o primeiro parâmetro foi fornecido
-if [ -z "$1" ]; then
-    echo "Você não forneceu nenhum valor. Por favor, insira um valor para o usuario."
-    exit 1
-fi
+# if [ -z "$1" ]; then
+#     echo "Você não forneceu nenhum valor. Por favor, insira um valor para o usuario."
+#     exit 1
+# fi
 
-if [ -z "$2" ]; then
-    echo "Você não forneceu nenhum valor. Por favor, insira um valor para a senha."
-    exit 1
-fi
+# if [ -z "$2" ]; then
+#     echo "Você não forneceu nenhum valor. Por favor, insira um valor para a senha."
+#     exit 1
+# fi
 
 IP_DIR="$HOME/.ip"
 IP_FILE="$IP_DIR/ip.txt"
@@ -21,8 +21,7 @@ export ssh_options="-o StrictHostKeyChecking=no -t"
 
 mkdir -p "$IP_DIR"
 
-# Se o parâmetro foi fornecido, atribui-o à variável 'user'
-
+# Se o parâmetro foi fornecido, atribui-o à variável
 passwd="zanthus"
 export passwd
 
