@@ -17,19 +17,35 @@ IP_DIR="$HOME/.ip"
 IP_FILE="$IP_DIR/ip.txt"
 IP_OK_FILE="$IP_DIR/ip_ok.txt"
 IP_OFF_FILE="$IP_DIR/ip_off.txt"
+export ssh_options="-o StrictHostKeyChecking=no -t"
 
 mkdir -p "$IP_DIR"
 
 # Se o parâmetro foi fornecido, atribui-o à variável 'user'
-user="$1"
+
 passwd="zanthus"
-export user
 export passwd
 
 # Executar comandos via SSH, usando IP atribuido ao arquivo ip_OK.txt
 for IP in $(cat "$IP_OK_FILE"); do
     ./ssh-keyscan.sh "$IP" &>>/dev/null
     echo "$IP"
+# Verifica a versão do Ubuntu e executa os comandos apropriados
+pdv_sshuservar() {
+if sshpass -p ""$senha_criptografada"" ssh ""$ssh_options"" user@"$IP" "lsb_release -r | grep -q '16.04'" &>>/dev/null; then
+    user="user"
+    export user
+elif sshpass -p ""$senha_criptografada"" ssh ""$ssh_options"" zanthus@"$IP" "lsb_release -r | grep -q '22.04'"; then
+    user="zanthus"
+    export user
+elif sshpass -p ""$senha_criptografada"" ssh ""$ssh_options"" zanthus@"$IP" "lsb_release -r | grep -q '12.04'"; then
+    user="zanthus"
+    export user
+else
+    echo "Não foi possível verificar o sistema do IP \"$IP\""
+fi
+}
+    pdv_sshuservar
     sshpass -p "$passwd" ssh -o StrictHostKeyChecking=no "$user"@"$IP" \
         "
         # Shell/CMD
