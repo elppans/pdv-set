@@ -56,7 +56,7 @@ fi
         echo ""$passwd"" | echo -e 'America/Recife' | sudo -S tee /etc/timezone >> /dev/null
         echo ""$passwd"" | sudo -S dpkg-reconfigure -f noninteractive tzdata
         echo ""$passwd"" | sudo -S hwclock -w
-        echo ""$passwd"" | sudo -S timedatectl set-local-rtc 1
+        echo ""$passwd"" | sudo -S timedatectl set-local-rtc 0
         echo ""$passwd"" | sudo -S timedatectl set-ntp 1
         echo ""$passwd"" | sudo -S timedatectl set-timezone  "America/Recife"
         echo ""$passwd"" | sudo -S ntpdate a.ntp.br
