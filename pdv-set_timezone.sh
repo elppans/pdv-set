@@ -30,6 +30,7 @@ for IP in $(cat "$IP_OK_FILE"); do
     ./ssh-keyscan.sh "$IP" &>>/dev/null
     echo "$IP"
 # Verifica a versão do Ubuntu e executa os comandos apropriados
+echo " User VAR..."
 pdv_sshuservar() {
 if sshpass -p ""$senha_criptografada"" ssh ""$ssh_options"" user@"$IP" "lsb_release -r | grep -q '16.04'" &>>/dev/null; then
     user="user"
@@ -45,6 +46,7 @@ else
 fi
 }
     pdv_sshuservar
+    echo "set timezone..."
     sshpass -p "$passwd" ssh -o StrictHostKeyChecking=no "$user"@"$IP" \
         "
         # Shell/CMD
