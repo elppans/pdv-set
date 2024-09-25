@@ -30,7 +30,7 @@ for IP in $(cat "$IP_OK_FILE"); do
     ./ssh-keyscan.sh "$IP" &>>/dev/null
     echo "$IP"
 # Verifica a versão do Ubuntu e executa os comandos apropriados
-echo " User VAR..."
+echo "Verificando usuário ssh..."
 pdv_sshuservar() {
 if sshpass -p ""$passwd"" ssh ""$ssh_options"" user@"$IP" "lsb_release -r | grep -q '16.04'" &>>/dev/null; then
     user="user"
@@ -46,10 +46,12 @@ else
 fi
 }
     pdv_sshuservar
-    echo "set timezone..."
     sshpass -p "$passwd" ssh -o StrictHostKeyChecking=no "$user"@"$IP" \
         "
         # Shell/CMD
+        echo "Versão do PDV..."
+        cat /etc/canoalinux-release
+        echo "Configurando timezone..."
         echo ""$passwd"" | sudo -S sed -i 's/UTC=no/UTC=yes/' /etc/default/rcS
         echo ""$passwd"" | sudo -S sed -i 's/NTPDATE_USE_NTP_CONF=no/NTPDATE_USE_NTP_CONF=yes/' /etc/default/ntpdate
         echo ""$passwd"" | sudo -S ln -sf /usr/share/zoneinfo/America/Recife /etc/localtime
@@ -62,6 +64,7 @@ fi
         echo ""$passwd"" | sudo -S ntpdate a.ntp.br
         echo ""$passwd"" | sudo -S hwclock -w
         timedatectl
+        echo "Hora atual do PDV:"
         date
         # Shell/CMD
         "
