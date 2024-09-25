@@ -27,8 +27,8 @@ export passwd
 
 # Executar comandos via SSH, usando IP atribuido ao arquivo ip_OK.txt
 for IP in $(cat "$IP_OK_FILE"); do
+    echo "Ajustando conexão do endereço IP: $IP"
     ./ssh-keyscan.sh "$IP" &>>/dev/null
-    echo "$IP"
 # Verifica a versão do Ubuntu e executa os comandos apropriados
 echo "Verificando usuário ssh..."
 pdv_sshuservar() {
@@ -49,10 +49,10 @@ fi
     sshpass -p "$passwd" ssh -o StrictHostKeyChecking=no "$user"@"$IP" \
         "
         # Shell/CMD
-        echo "Versão do PDV..."
+        echo "Analisando versão do PDV..."
         cat /etc/canoalinux-release
-        echo "Configurando timezone..."
-        echo ""$passwd"" | sudo -S sed -i 's/UTC=no/UTC=yes/' /etc/default/rcS
+        echo "Configurando Timezone..."
+        echo ""$passwd"" | sudo -S sed -i 's/UTC=no/UTC=yes/' /etc/default/rcS &>>/dev/null
         echo ""$passwd"" | sudo -S sed -i 's/NTPDATE_USE_NTP_CONF=no/NTPDATE_USE_NTP_CONF=yes/' /etc/default/ntpdate
         echo ""$passwd"" | sudo -S ln -sf /usr/share/zoneinfo/America/Recife /etc/localtime
         echo ""$passwd"" | echo -e 'America/Recife' | sudo -S tee /etc/timezone >> /dev/null
@@ -66,6 +66,8 @@ fi
         timedatectl
         echo "Hora atual do PDV:"
         date
+        echo "Configuração do Timezone finalizada!"
+        echo " "
         # Shell/CMD
         "
 done
