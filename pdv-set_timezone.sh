@@ -13,16 +13,28 @@
 #     exit 1
 # fi
 
+# Variáveis para o ambiente
 IP_DIR="$HOME/.ip"
 IP_FILE="$IP_DIR/ip.txt"
 IP_OK_FILE="$IP_DIR/ip_ok.txt"
 IP_OFF_FILE="$IP_DIR/ip_off.txt"
-export ssh_options="-o StrictHostKeyChecking=no -t"
+ssh_options="-o StrictHostKeyChecking=no -t"
+localstate="America/Sao_Paulo"
+
+# Exportar variáveis do ambiente
+export IP_DIR
+export IP_FILE
+export IP_OK_FILE
+export IP_OFF_FILE
+export ssh_options
+export localstate
 
 mkdir -p "$IP_DIR"
 
 # Se o parâmetro foi fornecido, atribui-o à variável
-passwd="zanthus"
+user="${user:-$1}"
+passwd="${zanthus:-$2}"
+export user
 export passwd
 
 # Executar comandos via SSH, usando IP atribuido ao arquivo ip_OK.txt
@@ -33,20 +45,20 @@ for IP in $(cat "$IP_OK_FILE"); do
 echo "Verificando usuário ssh..."
 pdv_sshuservar() {
 if sshpass -p ""$passwd"" ssh ""$ssh_options"" user@"$IP" "lsb_release -r | grep -q '16.04'" &>>/dev/null; then
-    user="user"
+    user="${$user:-$1}"
     export user
 elif sshpass -p ""$passwd"" ssh ""$ssh_options"" zanthus@"$IP" "lsb_release -r | grep -q '22.04'"; then
-    user="zanthus"
+    user="${zanthus:-$1}"
     export user
 elif sshpass -p ""$passwd"" ssh ""$ssh_options"" zanthus@"$IP" "lsb_release -r | grep -q '12.04'"; then
-    user="zanthus"
+    user="${zanthus:-$1}"
     export user
 else
     echo "Não foi possível verificar o sistema do IP \"$IP\""
 fi
 }
     pdv_sshuservar
-    sshpass -p "$passwd" ssh -o StrictHostKeyChecking=no "$user"@"$IP" \
+    sshpass -p "$passwd" ssh ""$ssh_options"" "$user"@"$IP" \
         "
         # Shell/CMD
         echo "Analisando versão do PDV..."
@@ -54,14 +66,14 @@ fi
         echo "Configurando Timezone..."
         echo ""$passwd"" | sudo -S sed -i 's/UTC=no/UTC=yes/' /etc/default/rcS &>>/dev/null
         echo ""$passwd"" | sudo -S sed -i 's/NTPDATE_USE_NTP_CONF=no/NTPDATE_USE_NTP_CONF=yes/' /etc/default/ntpdate
-        echo ""$passwd"" | sudo -S ln -sf /usr/share/zoneinfo/America/Recife /etc/localtime
-        echo ""$passwd"" | echo -e 'America/Recife' | sudo -S tee /etc/timezone >> /dev/null
+        echo ""$passwd"" | sudo -S ln -sf /usr/share/zoneinfo/"$localstate" /etc/localtime
+        echo ""$passwd"" | echo -e ""$localstate"" | sudo -S tee /etc/timezone >> /dev/null
         echo ""$passwd"" | sudo -S dpkg-reconfigure -f noninteractive tzdata
         echo ""$passwd"" | sudo -S hwclock -w
         echo ""$passwd"" | sudo -S timedatectl set-local-rtc 0
         echo ""$passwd"" | sudo -S timedatectl set-ntp 1
-        echo ""$passwd"" | sudo -S timedatectl set-timezone  "America/Recife"
-        echo ""$passwd"" | sudo -S ntpdate a.ntp.br
+        echo ""$passwd"" | sudo -S timedatectl set-timezone  ""$localstate""
+        echo ""$passwd"" | sudo -S ntpdate a.ntp.br b.ntp.br c.ntp.br
         echo ""$passwd"" | sudo -S hwclock -w
         timedatectl
         echo "Hora atual do PDV:"
