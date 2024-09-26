@@ -32,9 +32,7 @@ export localstate
 mkdir -p "$IP_DIR"
 
 # Se o parâmetro foi fornecido, atribui-o à variável
-user="${user:-$1}"
-passwd="${zanthus:-$2}"
-export user
+passwd="zanthus"
 export passwd
 
 # Executar comandos via SSH, usando IP atribuido ao arquivo ip_OK.txt
@@ -45,13 +43,13 @@ for IP in $(cat "$IP_OK_FILE"); do
 echo "Verificando usuário ssh..."
 pdv_sshuservar() {
 if sshpass -p ""$passwd"" ssh ""$ssh_options"" user@"$IP" "lsb_release -r | grep -q '16.04'" &>>/dev/null; then
-    user="${$user:-$1}"
+    user="user"
     export user
 elif sshpass -p ""$passwd"" ssh ""$ssh_options"" zanthus@"$IP" "lsb_release -r | grep -q '22.04'"; then
-    user="${zanthus:-$1}"
+    user="zanthus"
     export user
 elif sshpass -p ""$passwd"" ssh ""$ssh_options"" zanthus@"$IP" "lsb_release -r | grep -q '12.04'"; then
-    user="${zanthus:-$1}"
+    user="zanthus"
     export user
 else
     echo "Não foi possível verificar o sistema do IP \"$IP\""
@@ -61,7 +59,7 @@ fi
     sshpass -p "$passwd" ssh ""$ssh_options"" "$user"@"$IP" \
         "
         # Shell/CMD
-        echo "Analisando versão do PDV..."
+        echo -e "\nAnalisando versão do PDV..."
         cat /etc/canoalinux-release
         echo "Configurando Timezone..."
         echo ""$passwd"" | sudo -S sed -i 's/UTC=no/UTC=yes/' /etc/default/rcS &>>/dev/null
